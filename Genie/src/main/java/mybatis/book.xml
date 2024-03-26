@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="book">
+	<insert id="insertBook" parameterType="book">
+	insert into tpbook   
+	values  (tpbookseq.nextval ,#{title},#{inventory},#{author},#{category},#{price},#{pubdate},#{bookimg},#{summary}
+	,#{publisher},#{userid},sysdate+100,#{bookstate},#{grade},#{reviewAvg})
+	</insert>
+	
+	<select id="oneBook" parameterType="int" resultType="book">
+		select * from tpbook where booknum = #{booknum} 
+	</select>
+	
+	<select id="reviewload" parameterType="map" resultType="review">
+		select * from tpreview where booknum=#{booknum} and userid=#{userid}
+	</select>
+	
+	<select id="getBirth" parameterType="String" resultType="String">
+		select birthday from indimember where userid = #{userid}
+	</select>
+	
+	<insert id="insertReview"   parameterType="review">
+	insert into	tpreview values (tpreviewseq.nextval,#{booknum},#{userid},#{point},#{review},sysdate) 
+	</insert>
+	<delete id="deleteReview" parameterType="review">
+	delete from tpreview where reviewid=#{reviewid} 
+	</delete>
+    <update id="UpdateReview" parameterType="review">
+	update tpreview set point=#{point},review=#{review}
+	where reviewid= #{reviewid}
+	</update> 
+     
+	<select id="reviewList"    parameterType="map"  resultType="review">
+	select * from (             
+    	select rownum rnum, a.* from (             
+        	select * from tpreview where booknum = #{booknum}             
+        	order by REVIEWDATE desc
+	    ) a 
+	) where rnum 	&#60; #{max}
+    </select> 
+	
+	 <select id="checkReview" parameterType="review" resultType="string">
+      select userid from tpreview where  booknum=#{booknum} and userid=#{userid}
+     </select>
+	
+	<insert id="insertCart"   parameterType="cart">
+      insert into   tpcart values (tpcartseq.nextval,#{userid},#{booknum},#{amount},#{ischecked}) 
+   </insert>
+
+   <select id="checkCart" parameterType="cart" resultType="int">
+      select count(*) from tpcart where userid=#{userid} and booknum=#{booknum}
+   </select>
+   
+   <update id="updateCart" parameterType="cart">
+       update tpcart set amount = amount + #{amount} where userid = #{userid} and booknum = #{booknum}
+   </update>
+
+   
+   
+   <select id="checkSlang" parameterType="cart" resultType="int">
+      select count(*) from tpslang where userid=#{userid} and booknum=#{booknum}
+   </select>
+   <insert id="insertSlang"   parameterType="slang">
+      insert into   tpslang values (tpslangseq.nextval,#{userid},#{booknum},#{ischecked}) 
+   </insert>
+    <insert id="insertSlangAsZero"   parameterType="slang">
+      insert into   tpslang values (tpslangseq.nextval,#{userid},#{booknum},0) 
+   </insert>
+    
+    
+	<insert id="addBook" parameterType="book"> <!-- 梨   벑濡  -->
+		insert into tpbook values
+		(tpbookseq.nextval,#{title},#{author},#{category},
+		#{price},#{pubdate},#{bookimg},#{summary},#{publisher},
+		#{userid},sysdate,#{bookstate},#{grade},#{inventory})
+	</insert>
+	
+	<select id="bookList" resultType="book" parameterType="map"> <!--  쟾泥  梨  由ъ뒪 듃 -->
+      select c.* from(
+         select rownum rnum, b.* from(
+            select a.* from(
+               <if test='category!=null'>
+                  select * from tpbook where category = #{category} and bookstate != '대기'
+               </if>
+               <if test='category==null'>
+                  select * from tpbook  where bookstate != '대기'
+               </if>                  
+            )a
+            <if test="sortmap!=null">
+            order by ${sortmap}
+            </if>
+         )b
+         <if test="keyword!=null">
+            where LOWER(title) like '%'||LOWER(#{keyword})||'%'
+         </if>            
+      )c
+      where rnum between #{start} and #{end}
+   </select>
+	
+	
+	<select id="Bookcheck" resultType="book" parameterType="map"> <!--  쟾泥  梨  由ъ뒪 듃 -->
+		select c.* from(
+			select rownum rnum, b.* from(
+				select a.* from(
+			
+						select * from tpbook where bookstate='대기'
+				
+				)a
+				<if test="sortmap!=null">
+				order by ${sortmap}
+				</if>
+			)b
+			
+		)c
+		where rnum between #{start} and #{end}
+	</select>
+
+	<select id="newBookList" resultType="book"> <!--  떊媛꾨룄 꽌由ъ뒪 듃 -->
+		select rownum,a.* from 
+		(select * from tpbook order by 1 desc)a 
+		where rownum <![CDATA[<]]> 5
+	</select> 
+	
+	<select id="rankBookList" resultType="book" parameterType="string"> <!--  떊媛꾨룄 꽌由ъ뒪 듃 -->
+		select rownum,a.* from 
+		(select * from tpbook order by inventory asc)a 
+		where rownum <![CDATA[<]]> 5
+	</select> 
+
+	
+	<update id="updateBook"  parameterType="book" >
+	update  tpbook   
+	set   title = #{title}, inventory = #{inventory}, author = #{author}, category = #{category}, price = #{price}, pubdate = #{pubdate}, bookimg = #{bookimg}, summary = #{summary}
+	, publisher = #{publisher}, userid = #{userid}, expdate = #{expdate}, bookstate = #{bookstate}, grade = #{grade} where booknum = #{booknum}
+	</update>
+	
+	<update id="checkBook"  parameterType="book" >
+	update  tpbook   
+	set bookstate = #{bookstate} where booknum = #{booknum}
+	</update>
+	<delete id="deleteBook" parameterType="int"> <!--  벑濡앹콉  궘 젣 -->
+		delete from tpbook where booknum = #{booknum}
+	</delete>
+	
+	<select id="bookCount" resultType="int" parameterType="map"> <!-- 梨낆닔 웾 移댁슫 듃 -->
+		select nvl(count(*),0) from(
+			select * from tpbook 
+			<trim prefix="where" prefixOverrides="AND||OR">
+				<if test='category!=null'>
+				and category = #{category}
+				</if>
+				<if test="keyword!=null">
+				and title like '%'||#{keyword}||'%'
+				</if>
+			</trim>
+		)
+	</select>
+	
+		<select id="checkCount" resultType="int" parameterType="map"> <!-- 梨낆닔 웾 移댁슫 듃 -->
+		select nvl(count(*),0) from(
+			select * from tpbook 
+			<trim prefix="where" prefixOverrides="AND||OR">
+				<if test='category!=null'>
+				and category = #{category}
+				</if>
+				<if test="keyword!=null">
+				and title like '%'||#{keyword}||'%'
+				</if>
+			</trim>	
+		)
+	</select>
+	
+	
+	<update id="updateAvg" parameterType="map">
+	    UPDATE tpbook
+	    SET reviewAvg = (
+	        SELECT AVG(point) AS reviewAvg
+	        FROM tpreview
+	        WHERE booknum = #{booknum}
+	    )
+	    WHERE booknum = #{booknum}
+	</update>
+	
+</mapper>

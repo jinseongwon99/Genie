@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<!-- 찜목록 리스트 -->
+	<select id="slangList" parameterType="String" resultType="order">
+		SELECT *
+		FROM tpbook JOIN tpslang ON tpbook.booknum = tpslang.booknum 
+		WHERE tpslang.userid = #{userid}
+	</select>
+	<!-- 찜목록 금액 합계계산 -->
+	<select id="slangTotal" parameterType="String" resultType="int">
+		SELECT sum(price)
+		FROM tpbook JOIN tpslang ON tpbook.booknum = tpslang.booknum 
+		WHERE tpslang.userid = #{userid}
+	</select>
+	
+	<!-- 찜목록 아이템 삭제 -->
+	<delete id="deleteSlangItem" parameterType="int">
+		DELETE TPSLANG WHERE SLANGID = #{slangid}
+	</delete>
+	<!-- 찜목록 아이템 삭제 -->
+	<delete id="deleteSlangCheckItem" parameterType="String">
+		DELETE TPSLANG WHERE USERID = #{userid} AND ISCHECKED=1
+	</delete>
+	<!-- 찜목록 ischecked 업데이트 -->
+	<update id="updateSlangCheckState" parameterType="Map">
+		UPDATE TPSLANG SET ISCHECKED=#{checked} WHERE SLANGID=#{itemId}
+	</update>
+	
+	
+	<select id="ischeckedSlangItem" parameterType="String" resultType="order">
+		select * from tpslang where userid = #{userid} and ischecked=1
+	</select>
+	
+	<insert id="insertFromStoCart" parameterType="Map">
+		insert into tpcart values (tpcartseq.nextval,#{userid},#{booknum},1,1) 
+	</insert>
+	
+	<select id="checkCartExist" parameterType="Map" resultType="int">
+		select count(*) from tpcart where userid = #{userid} and booknum = #{booknum}
+	</select>
+	
+	
+	<!-- 장바구니 아이템 수량 산출 -->
+	<select id="cartCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM TPCART WHERE USERID = #{userid}
+	</select>
+	<!-- 장바구니 검색 -->
+	<select id="cartList" parameterType="String" resultType="order">
+		SELECT *
+		FROM tpbook JOIN tpcart ON tpbook.booknum = tpcart.booknum 
+		WHERE tpcart.userid = #{userid}
+	</select>
+	<!-- 장바구니 금액 합계계산 -->
+	<select id="total" parameterType="String" resultType="int">
+		SELECT sum(price*amount)
+		FROM tpbook JOIN tpcart ON tpbook.booknum = tpcart.booknum 
+		WHERE tpcart.userid = #{userid}
+	</select>
+	
+	<!-- 주문용 카트 정보 ischecked==1인 상품조회 -->
+	<select id="listCart" parameterType="String" resultType="order">
+		SELECT * FROM TPCART WHERE USERID=#{userid} AND ISCHECKED=1
+	</select>
+
+
+	<!-- 장바구니 아이템 수량 계산 -->
+	<select id="itemCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM TPCART WHERE USERID = #{userid}
+	</select>	
+	<!-- 상품 재고량 산출 -->
+	<select id="getInven" parameterType="int" resultType="int">
+		SELECT INVENTORY FROM TPBOOK WHERE BOOKNUM = #{booknum}
+	</select>
+	<!-- 장바구니 아이템 수량 변경 -->
+	<update id="changeItemAmount" parameterType="Map">
+		UPDATE TPCART SET AMOUNT = #{amount} WHERE CARTID = #{cartid} 
+	</update>
+	<!-- 장바구니 아이템 삭제 -->
+	<delete id="deleteItemCart" parameterType="int">
+		DELETE TPCART WHERE CARTID = #{cartid}
+	</delete>
+	<!-- 장바구니 아이템 삭제 -->
+	<delete id="deleteCheckItem" parameterType="String">
+		DELETE TPCART WHERE USERID = #{userid} AND ISCHECKED=1
+	</delete>
+	<!-- 장바구니 ischecked 업데이트 -->
+	<update id="updateCheckState" parameterType="Map">
+		UPDATE TPCART SET ISCHECKED=#{checked} WHERE CARTID=#{itemId}
+	</update>
+	
+	<!-- 장바구니 아이템 재고량 검사 -->
+	<select id="checkInven" parameterType="int" resultType="int">
+		SELECT INVENTORY FROM TPBOOK WHERE BOOKNUM = #{booknum}
+	</select>
+	<!-- 장바구니 아이템 이름 추출 -->
+	<select id="getBookName" parameterType="int" resultType="String">
+		SELECT TITLE FROM TPBOOK WHERE BOOKNUM = #{booknum}
+	</select>
+	<!-- 장바구니 > 주문 페이지 상품 리스트 추출 -->
+	<select id="orderList" parameterType="String" resultType="order">
+		SELECT *
+		FROM tpbook JOIN tpcart ON tpbook.booknum = tpcart.booknum 
+		WHERE tpcart.userid = #{userid} AND tpcart.ischecked = 1
+	</select>
+	<!-- 주문 페이지 유저 정보 추출 -->
+	<select id="oneMember" parameterType="String" resultType="order">
+		SELECT NAME, EMAIL, TEL, ADDR, ADMIN, POINT FROM INDIMEMBER WHERE USERID=#{userid}
+	</select>
+	<!-- 주문 페이지 전체 금액 계산 -->
+	<select id="getOrderTotalPay" parameterType="String" resultType="int">
+		SELECT sum(price*amount)
+		FROM tpbook JOIN tpcart ON tpbook.booknum = tpcart.booknum 
+		WHERE tpcart.userid = #{userid} AND tpcart.ischecked = 1
+	</select>
+	
+	
+	
+	
+	
+	
+	<!-- 주문페이지 : 상품 주문기능(insert to TPORDERLOG) -->
+	<insert id="orderItem" parameterType="orderLog">
+		INSERT INTO TPORDERLOG VALUES 
+		(ORDERLOGID_SEQ.NEXTVAL, #{orderid}, #{userid}, 
+		#{booknum}, #{amount}, '주문접수')
+	</insert>
+	<!-- 주문페이지 : 상품 재고량 조정 -->
+	<update id="invenAdj" parameterType="Map">
+		UPDATE TPBOOK SET INVENTORY = INVENTORY - #{amount} WHERE BOOKNUM = #{booknum}
+	</update>
+	<!-- 주문페이지 : 상품 배송지정보(insert to TPORDERINFO) -->
+	<insert id="orderInfo" parameterType="orderLog">
+		INSERT INTO TPORDERINFO VALUES 
+		(#{orderid}, #{ordername}, #{ordertel}, #{orderemail}, 
+		#{discount}, #{cashcard}, #{orderaddr}, '주문접수', sysdate, sysdate)
+	</insert>
+	<!-- member 정보에 포인트 차감 -->
+	<update id="useUserPoint" parameterType="Map">
+		UPDATE INDIMEMBER SET POINT = POINT - #{point} WHERE USERID = #{userid}
+	</update>
+	<!-- pointLog 테이블에 기록 : 포인트 사용시 -->
+	<insert id="useUserPointLog" parameterType="Map">
+		INSERT INTO TPPOINTLOG VALUES (POINTLOG_SEQ.NEXTVAL, #{orderid}, null, #{userid}, #{point}, SYSDATE)
+	</insert>
+	
+	<!-- 주문시 장바구니 초기화 -->
+	<delete id="clearCart" parameterType="String">
+		DELETE TPCART WHERE USERID = #{userid}
+	</delete>
+	
+	<!-- 주문기록 조회 -->
+	<select id="orderLogList" parameterType="String" resultType="orderLog">
+		SELECT 
+		    O.ORDERID AS ORDERID, 
+		    MAX(I.ORDERSTATE) AS ORDERSTATE, 
+		    MAX(I.REGDATE) AS REGDATE,
+		    SUM(B.price * O.amount) - MAX(I.DISCOUNT) AS TOTAL
+		FROM TPORDERLOG O
+		JOIN tpbook B ON B.booknum = O.booknum
+		JOIN tporderinfo I ON I.orderid = O.orderid
+		WHERE O.USERID = #{userid}
+		GROUP BY O.ORDERID
+		ORDER BY REGDATE DESC
+	</select>
+	<!-- 주문기록 카운팅 -->
+	<select id="logListCount" parameterType="String" resultType="int">
+		SELECT COUNT(DISTINCT ORDERID) FROM TPORDERLOG WHERE USERID = #{userid}
+	</select>
+	<!-- 주문기록 상세정보 출력 -->
+	<select id="orderDetail" parameterType="Map" resultType="orderLog">
+		SELECT *
+		FROM TPORDERLOG O
+		JOIN TPBOOK B ON O.BOOKNUM = B.BOOKNUM
+		WHERE O.USERID = #{userid} AND O.ORDERID = #{orderid}
+	</select>
+	<!-- 주문기록 상세정보 : 상품 총 금액 합계 -->
+	<select id="orderDetailTotal" parameterType="Map" resultType="int">
+		SELECT 
+		    SUM(B.price * O.amount) AS TOTAL
+		FROM TPORDERLOG O
+		JOIN tpbook B ON B.booknum = O.booknum
+		WHERE O.USERID = #{userid} AND O.ORDERID=#{orderid}
+		GROUP BY O.ORDERID
+	</select>
+	<!-- 주문기록 상세정비 : 배송지 정보 -->
+	<select id="orderDetailInfo" parameterType="String" resultType="orderLog">
+		SELECT * FROM TPORDERINFO WHERE ORDERID = #{orderid}
+	</select>
+	
+	<!-- 주문상태 수취확인 변경 -->
+	<update id="updateState" parameterType="Int">
+		UPDATE TPORDERLOG SET ORDERSTATEDETAIL = '수취완료' WHERE ORDERLOGID = #{orderlogid}
+	</update>
+	<!-- 주문상태 수취확인 변경 : info -->
+	<update id="updateStateInfo" parameterType="String">
+		UPDATE TPORDERINFO SET ORDERSTATE = '수취완료' WHERE ORDERID = #{orderid}
+	</update>
+	<!-- 주문상태 배달완료 리스트 출력 -->
+	<select id="orderLogDetailList" parameterType="Map"  resultType="orderLog">
+		SELECT * FROM TPORDERLOG WHERE ORDERID = #{orderid} AND USERID = #{userid} AND ORDERSTATEDETAIL = '배송완료'
+	</select>
+	<!-- 주문상태 교환 변경 -->
+	<update id="updateStateChange" parameterType="Int">
+		UPDATE TPORDERLOG SET ORDERSTATEDETAIL = '교환신청' WHERE ORDERLOGID = #{orderlogid}
+	</update>
+	<!-- 주문상태 반품 변경 -->
+	<update id="updateStateReturn" parameterType="Int">
+		UPDATE TPORDERLOG SET ORDERSTATEDETAIL = '반품신청' WHERE ORDERLOGID = #{orderlogid}
+	</update>
+	
+	<!-- 주문상태 주문취소 변경 -->
+	<update id="updateLogStateCancle" parameterType="String">
+		UPDATE TPORDERLOG SET ORDERSTATEDETAIL = '주문취소' WHERE ORDERID = #{orderid}
+	</update>
+	<update id="updateInfoStateCancle" parameterType="String">
+		UPDATE TPORDERINFO SET ORDERSTATE = '주문취소' WHERE ORDERID = #{orderid}
+	</update>
+	
+	<!-- 주문로그id 별 포인트 추출 -->
+	<select id="selectPoint" parameterType="Int" resultType="int">
+		SELECT B.PRICE*O.AMOUNT*0.05 AS POINT FROM TPORDERLOG O JOIN TPBOOK B ON O.BOOKNUM=B.BOOKNUM WHERE O.ORDERLOGID = #{orderlogid}
+	</select>
+	<!-- member 정보에 포인트 가산 -->
+	<update id="getPoint" parameterType="Map">
+		UPDATE INDIMEMBER SET POINT = POINT + #{point} WHERE USERID = #{userid}
+	</update>
+	<!-- pointLog 테이블에 기록 : 포인트 가산시 -->
+	<insert id="getPointLog" parameterType="Map">
+		INSERT INTO TPPOINTLOG VALUES (POINTLOG_SEQ.NEXTVAL, null, #{orderlogid}, #{userid}, #{point}, SYSDATE)
+	</insert>
+	
+	
+	<!-- 관리자용 모든 주문로그 출력 -->
+	<select id="getAllOrderLog" resultType="orderLog">
+		SELECT
+		    O.ORDERID AS ORDERID, 
+		    MAX(I.ORDERSTATE) AS ORDERSTATE, 
+		    MAX(I.REGDATE) AS REGDATE,
+		    SUM(B.price * O.amount) - MAX(I.DISCOUNT) AS TOTAL
+		FROM TPORDERLOG O
+		JOIN tpbook B ON B.booknum = O.booknum
+		JOIN tporderinfo I ON I.orderid = O.orderid
+		GROUP BY O.ORDERID
+		ORDER BY REGDATE DESC
+	</select>
+	<!-- 관리자용 모든 주문로그 수 카운팅 -->
+	<select id="allLogListCount" resultType="int">
+		SELECT COUNT(DISTINCT orderid) FROM tporderlog
+	</select>
+	<update id="adminOrderLogState" parameterType="Map">
+		UPDATE TPORDERLOG SET ORDERSTATEDETAIL = #{state} WHERE ORDERID = #{orderid}
+	</update>
+	<update id="adminOrderInfoState" parameterType="Map">
+		UPDATE TPORDERINFO SET ORDERSTATE = #{state} WHERE ORDERID = #{orderid}
+	</update>
+	
+	
+	<!-- 관리자용 주문기록 상세정보 출력 -->
+	<select id="adminOrderDetail" parameterType="String" resultType="orderLog">
+		SELECT *
+		FROM TPORDERLOG O
+		JOIN TPBOOK B ON O.BOOKNUM = B.BOOKNUM
+		WHERE O.ORDERID = #{orderid}
+	</select>
+	<!-- 관리자용 주문기록 상세정보 : 상품 총 금액 합계 -->
+	<select id="adminOrderDetailTotal" parameterType="String" resultType="int">
+		SELECT 
+		    SUM(B.price * O.amount) AS TOTAL
+		FROM TPORDERLOG O
+		JOIN tpbook B ON B.booknum = O.booknum
+		WHERE O.ORDERID=#{orderid}
+		GROUP BY O.ORDERID
+	</select>
+	<!-- 관리자용 주문기록 상세정비 : 배송지 정보 -->
+	<select id="adminOrderDetailInfo" parameterType="String" resultType="orderLog">
+		SELECT * FROM TPORDERINFO WHERE ORDERID = #{orderid}
+	</select>
+	<select id="adminCheckOrderState" parameterType="String" resultType="String">
+		SELECT ORDERSTATE FROM TPORDERINFO WHERE ORDERID = #{orderid}
+	</select>
+	
+	
+	<select id="checkUserPoint" parameterType="String" resultType="int">
+		SELECT POINT FROM INDIMEMBER WHERE USERID = #{userid}
+	</select>
+</mapper>

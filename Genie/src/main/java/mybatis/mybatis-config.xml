@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+</settings>
+	<typeAliases>
+	<typeAlias type="model.Order" alias="order"/>
+	<typeAlias type="model.OrderLog" alias="orderLog"/>
+	<typeAlias type="model.Book" alias="book"/>
+	<typeAlias type="model.Review" alias="review"/>
+	<typeAlias type="model.Cart" alias="cart"/>
+	<typeAlias type="model.Slang" alias="slang"/>
+	<typeAlias type="model.Member" alias="member"/>
+	<typeAlias type="model.Point" alias="point"/>
+	<typeAlias type="model.IndiMember"    alias="indimember"/>
+    <typeAlias type="model.CorpMember"    alias="corpmember"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+				<property name="username" value="kic"/>
+				<property name="password" value="1111"/>		
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+	<mapper resource="mybatis/order.xml"/>
+	<mapper resource="mybatis/book.xml"/>
+	<mapper class="mybatis.OneOnOneAnno" />
+	<mapper class="mybatis.NoticeAnno" />
+	<mapper class="mybatis.EventAnno" />
+	<mapper class="mybatis.FaqAnno" />
+	<mapper class="mybatis.MemberAnno" />
+    <mapper class="mybatis.CorpMemberAnno" />
+    <mapper class="mybatis.AdminAnno" />
+    <mapper class="mybatis.UserBookAnno" />
+	</mappers>
+</configuration>

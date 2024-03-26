@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+#scroll {
+    position: absolute;
+    left: 50%;
+    width: 102px;
+    height: auto;
+    margin-left: 480px;
+    padding-bottom: 5px;
+    font-size: 11px;
+    border-bottom: 1px solid #c0c0c0;
+    background: url(../image/logo/bg_quick.gif) no-repeat left top;
+    z-index: 999;
+}
+
+
+#scroll a.quick_cart {
+    display: block;
+    width: 80%;
+    height: 30px;
+    margin: 2px 0;
+    padding: 0 10%;
+    color: #fff;
+    line-height: 30px;
+}
+
+#scroll dl dt {
+    position: relative;
+    display: block;
+    width: 80%;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 0 10%;
+    color: #fff;
+}
+
+
+#scroll dl dt span {
+    position: absolute;
+    top: 0;
+    left: 75px;
+    font-weight: bold;
+    color: #63ea00;
+}
+
+
+#scroll dl dd {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-left: 0;
+}
+
+#scroll div.quick_page {
+    float: left;
+    width: 45px;
+    margin-left: 10px;
+    line-height: 16px;
+}
+
+#scroll div.quick_page span {
+    font-weight: bold;
+    color: #4db901;
+}
+
+
+
+#scroll div.quick_arr a {
+    float: left;
+    display: block;
+    width: 15px;
+    height: 16px;
+    margin-right: 1px;
+}
+
+#scroll div.quick_arr a:link, a:visited, a:active {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#gdscroll a:link, a:visited, a:active {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#scroll dl dd img {
+    width: 78px;
+    height: auto;
+    border: 1px solid #bfc0c5;
+}
+
+#scroll div.quick_arr {
+    float: right;
+    width: 32px;
+    height: 16px;
+    margin-right: 10px;
+    background: url(../image/logo/arr_set.gif) no-repeat left top;
+}
+

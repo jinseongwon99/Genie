@@ -1,0 +1,44 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0" metadata-complete="true">
+	<display-name>Archetype Created Web Application</display-name>
+
+	<jsp-config>
+		<jsp-property-group>
+			<url-pattern>/WEB-INF/view/order/*</url-pattern>
+			<url-pattern>/WEB-INF/view/book/*</url-pattern>
+			<url-pattern>/WEB-INF/view/view/*</url-pattern>
+			<url-pattern>/WEB-INF/view/member/*</url-pattern>
+			
+			<include-prelude>/common/header.jsp</include-prelude>
+			<include-coda>/common/footer.jsp</include-coda>
+		</jsp-property-group>
+	</jsp-config>
+
+	<servlet>
+		<servlet-name>genie</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>genie</servlet-name>
+		<url-pattern>/</url-pattern> 
+	</servlet-mapping> 
+	
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+</web-app>

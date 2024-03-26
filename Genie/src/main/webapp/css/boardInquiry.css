@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+.counsel_box {
+    width: 1230px;
+    height: 160px;
+    border: 1px solid #e5e5e5;
+    background: #e5e5e5;
+}
+
+
+.counsel_box .counsel_title {
+    font-family: Noto Sans;
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin: 36px 0 0 0;
+    color: #8c7e7e;
+}
+
+.counsel_box .counsel_mtitle {
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0 0 0;
+    color: #8c7e7e;
+}
+
+.help {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.boardRegisterDiv {
+    border-top: 1px solid #E5E5E5;
+    border-bottom: none;
+}
+
+.boardRegisterDiv table {
+    border: 0px;
+}
+.boardList07 {
+    border-collapse: collapse;
+    border-top: 1px solid #E2D4C1;
+    border-bottom: 1px solid #E2D4C1;
+}
+
+.boardList07 td {
+    border: none;
+    height: 42px;
+    color: #000;
+    font-size: 16px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 400;
+}
+
+table td.td_L10 {
+    text-align: left;
+    padding-left: 10px;
+}
+
+
+.boardList07 th {
+    text-align: left;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-size: 16px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 52px;
+}
+
+.boardList07 td.tdE {
+    border-right: 0 none;
+}
+table td.td_L10 {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.boardList07 td.td_line {
+    padding: 0px;
+    background: #E9E4DC;
+    height: 1px;
+    border-right: 0 none;
+}
+
+.fl_left {
+    float: left;
+    font-size: 16px;
+}
+
+.boardList07 input, .boardList07 select {
+    height: 42px;
+    min-width: 162px;
+    text-indent: 6px;
+}
+
+.boardList07 input, .boardList07 select, .boardList07 textarea {
+    border-radius: 5px;
+    border: 1px solid #DBDBDB;
+}
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.fl_left {
+    float: left;
+    font-size: 16px;
+}
+
+#app, #back {
+    margin: auto;
+    margin-top: 50px;
+    width: 214px;
+    height: 48px;
+    border-radius: 50px;
+    background: #C3C3C3;
+    color: #FFF;
+    font-size: 18px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px;
+}
+
+#app a, #back a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+.btnC {
+    text-align: center;
+}
+

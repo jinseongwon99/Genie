@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+             http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+             http://www.springframework.org/schema/context/spring-context.xsd 
+             http://www.springframework.org/schema/mvc
+             http://www.springframework.org/schema/mvc/spring-mvc.xsd            
+             ">
+             
+	<mvc:annotation-driven />       
+	<context:component-scan base-package="controller, dao" />
+	<context:annotation-config />
+	
+	
+   <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+    <mvc:resources location="/image/" mapping="/image/**" />
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+   	
+   	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10000000"></property>
+	</bean>
+   
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+   
+    <bean id="dataSource"
+      class="com.mchange.v2.c3p0.ComboPooledDataSource"
+      destroy-method="close">
+      <property name="driverClass">
+         <value>oracle.jdbc.OracleDriver</value>
+      </property>
+      <property name="jdbcUrl">
+         <value>jdbc:oracle:thin:@localhost:1521:xe</value>
+      </property>
+      <property name="user">
+         <value>kic</value>
+      </property>
+      <property name="password">
+         <value>1111</value>
+      </property>
+      <property name="maxPoolSize">
+         <value>20</value>
+      </property><!-- 최대 연결 객체 갯수 -->
+      <property name="minPoolSize">
+         <value>3</value>
+      </property> <!-- 최소 연결 객체 갯수 -->
+      <property name="initialPoolSize">
+         <value>5</value>
+      </property> <!-- 초기 연결 객체 갯수 -->
+      <property name="acquireIncrement">
+         <value>5</value>
+      </property> <!-- 연결 객체 증가 갯수 -->
+   </bean>
+
+   <bean id="sqlSessionFactory"
+      class="org.mybatis.spring.SqlSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" /> 
+      <property name="configLocation"
+         value="classpath:mybatis/mybatis-config.xml" />
+   </bean>
+   
+   <bean class="org.mybatis.spring.SqlSessionTemplate">
+      <constructor-arg ref="sqlSessionFactory" />
+   </bean>
+   
+   <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  <property name="defaultEncoding" value="utf-8"/>
+   </bean> -->
+</beans>

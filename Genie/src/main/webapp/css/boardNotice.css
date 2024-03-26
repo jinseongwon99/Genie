@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+/* 테이블 공통 */
+.table_comm{border-top:1px solid #d5d5d5;/* width: 1170px; */}
+.table_comm th{font:normal 11px 돋움;background:#f8f8f8;border-bottom:1px solid #e1e1e1;padding:12px 5px 10px 5px; text-align:center;color:#333}
+.table_comm th:first-child{border-left:none}
+.table_comm td{padding:12px 5px 10px 5px;border-bottom:1px solid #e1e1e1; text-align:center;color:#666}
+.table_comm td:first-child{border-left:none}
+.table_comm td.t_left{text-align:left;padding-left:12px}
+.table_comm td.t_right{text-align:center; word-break: keep-all;word-wrap: break-word; font-size:16px;}
+.table_comm .book_img{width:40px;hheight:60px}
+.table_comm .book_img img{width:38px;border:1px solid #d2d2d2}
+.table_comm .book_name{display:block;float:left;margin-left:10px} 
+.table_comm_row{border-top:2px solid #d5d5d5}
+.table_comm_row th{font:normal 11px 돋움; color:#333;background:#f8f8f8;border-bottom:1px solid #e1e1e1;padding:12px 5px 10px 20px; text-align:left}
+.table_comm_row td{padding:12px 5px 10px 12px ;border-bottom:1px solid #e1e1e1; font-size: 16px;}
+.table_comm_row .tr_deliEng td{padding:14px 5px 15px 20px}
+.table_comm_row .messages{width:90%; height:60px; border:1px solid #d1d1d1; font:normal 14px 돋움,Dotum,AppleGothic,sans-serif}
+.table_comm_row .saleW{float:left;width:250px}.orderTable2 .sale2W{float:left;margin-left:10px}
+.table_comm_row .bgcon{background:#e1e1e1;}
+.table_comm_row .line_none{border-bottom:none}
+.table_comm_row .pb0{padding-bottom:2px}
+.table_comm_row .pl0{padding-left:0px} 
+.table_comm_row .bbs_tit{font:normal 16px '맑은 고딕','돋움'; color:#000;padding:15px 10px}
+.table_comm_row .bbs_date{font:normal 11px 돋움;color:#888;text-align:right;padding:25px 5px 5px 0} 
+.table_comm_row .bbs_con{padding:0}
+.table_comm_row .bbs_con_w{padding:25px 20px 25px 20px;width:710px;color:#666}
+.table_comm_row .bbs_con img{width:auto;max-width:100%;}
+
+
+
+.notice_box {
+    width: 1230px;
+    height: 160px;
+    border: 1px solid #e5e5e5;
+    background: #e5e5e5;
+}
+
+.notice_box .notice_title {
+    font-family: Noto Sans;
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin: 36px 0 0 0;
+    color: #8c7e7e;
+}
+
+.notice_box .notice_mtitle {
+    font-family: Noto Sans;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0 0 0;
+    color:#8c7e7e ;
+}
+
+.tap_menu_d2 {
+    position: relative;
+    height: 50px;
+    width: 100%;
+}
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.al_right {
+    text-align: right;
+    margin: 0 50px 0 0;
+}
+
+
+.table_comm {
+    border-top: 1px solid #d5d5d5;
+    width: 900px;
+}
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.table_comm td.t_left {
+    text-align: left;
+    padding-left: 12px;
+}
+
+.table_comm td.t_left {
+    text-align: left;
+    padding-left: 12px;
+}
+/* .table_comm td {
+    padding: 25px;
+} */
+
+
+.o_input {
+    height: 28px;
+    padding: 2px 2px 2px 5px;
+    border: 1px solid #d1d1d1;
+    background: #fcfcfc;
+    font-size: 13px;
+}
+
+.btype_a2 {
+    height: 16px;
+    line-height: 16px;
+    padding: 4px 10px;
+    font-size: 12px;
+    text-align: center;
+    display: inline-block;
+    margin: -3px 0 0 4px;
+    vertical-align: middle;
+}
+
+
+.btn_gy_comm {
+    display: inline-block;
+    font: bolder 12px 돋움;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #8f8f8f;
+    background: #9d9d9d;
+    color: #fff !important;
+    height: 25px; 
+    border-radius: 5px;
+}
+.hand {
+    cursor: pointer;
+}
+
+
+

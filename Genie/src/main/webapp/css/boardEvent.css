@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+
+#contentBody {
+    width: 1230px;
+    margin: 20px auto;
+}
+
+.pastEvent {
+    width: 100%;
+    margin: 0;
+    *margin-bottom: 10px;
+    overflow: auto;
+    overflow: hidden;
+    border-top: 1px solid #e1e1e1;
+}
+
+.pastEvent li .event_img {
+    border: 1px solid #e1e1e1;
+    width: 100%;
+    display: block;
+}
+
+.pastEvent li .event_img a {
+    display: block;
+    width: 100%;
+}
+
+.pastEvent ul.ingEvent li .dp_tit {
+    margin: 5px 0 3px;
+}
+.pastEvent li .dp_tit {
+    margin: 10px 0 5px;
+    font-weight: bolder;
+}
+
+.t_gr {
+    color: #888888;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.pastEvent ul.ingEvent li .dp_date {
+    margin: 7px 0 0;
+}
+
+.pastEvent li .dp_date {
+    margin: 10px 0 0 5px;
+    color: #888;
+    font: normal 11px 돋움;
+}
+
+.pageTypeA {
+    clear: both;
+    height: 50px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.pageTypeA a:hover, .pageTypeA a.on {
+    text-decoration: none;
+    border: 1px solid #B67A24;
+    font-weight: bolder;
+    background: #f9f9f9;
+}
+
+.pageTypeA a:hover, .pageTypeA a.on {
+    text-decoration: none;
+    border: 1px solid #B67A24;
+    font-weight: bolder;
+    background: #f9f9f9;
+}
+.pageTypeA a {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    margin: 0 1px;
+    border: 1px solid #d1d1d1;
+    font: normal 14px verdana;
+    color: #826740;
+    text-align: center;
+    line-height: 26px;
+    box-sizing: border-box;
+}
+
+
+.pastEvent	{/* width:100%; *//* margin:0; */ *margin-bottom:10px;/* overflow:auto; *//* overflow:hidden; *//* border-top:1px solid #e1e1e1; */}
+.pastEvent	ul	{width:100%;overflow:auto;overflow:hidden;}
+.pastEvent	li	{float:left; width: calc(33.33% - 21.95px); height:250px; margin:16px 0 0 16px;}
+.pastEvent	li	.event_img{border:1px solid #e1e1e1;width:100%;display:block;}
+.pastEvent	li	.event_img a{display: block;width: 100%;}
+.pastEvent	li	.event_img img{width:100%;display:block;}
+.pastEvent	li	.dp_tit	{margin:10px 0 5px;font-weight:bolder;}
+.pastEvent	li	.dp_ico	{margin:10px 0 0 0;}
+.pastEvent	li	.dp_con	{height:32px; overflow:hidden}
+.pastEvent	li	.dp_date	{margin:10px 0 0 5px; color:#888; font:normal 11px 돋움}
+.pastEvent	li	.btnR	{padding:0}
+.pastEvent	ul.ingEvent	 li	.dp_tit	{margin:5px 0 3px;}
+.pastEvent	ul.ingEvent	 li	.dp_date	{margin:7px 0 0}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
