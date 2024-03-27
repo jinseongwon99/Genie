@@ -466,6 +466,7 @@ textarea {
 
 
 					<!-- 버튼 -->
+				<c:if test="${book.userid eq 'admin'}">
 					<div class="Ere_btn_e_cart Ere_floatL">
 						<a
 							href="${pageContext.request.contextPath}/book/bookUpdateForm?booknum=${book.booknum}">게시글
@@ -476,9 +477,8 @@ textarea {
 					href="javascript:void(0);"
 					onclick="deleteForm(${book.booknum});">도서 삭제
 					</a>
-					
 					</div>
-									
+					</c:if>
 				</div>
 				
 				<!-- 서지 정보 끝 -->

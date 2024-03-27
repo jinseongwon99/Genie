@@ -13,9 +13,6 @@
 <link rel="stylesheet" media="screen"
 	href="${pageContext.request.contextPath}/css/bookList.css">
 
-<%
-String userid = (String) session.getAttribute("userid");
-%>
 
 </head>
 <body>
@@ -24,15 +21,12 @@ String userid = (String) session.getAttribute("userid");
 			<div id="faqWrap">
 				<!-- Location -->
 
-
-
 				<!-- //location -->
 				<div class="conWrap p_center" id="selCSS2">
 
 					<div class="faq_box">
-						<p class="faq_title" style="margin-top: 55px;">중고 도서 정보 관리</p>
-						<p class="faq_mtitle" style="margin-top: 24px;">${userid}님이
-							등록하신 도서 목록입니다</p>
+						<p class="faq_title" style="margin-top: 55px;">도서 정보 관리</p>
+						<p class="faq_mtitle" style="margin-top: 24px;">관리자 페이지</p>
 					</div>
 
 
@@ -43,67 +37,104 @@ String userid = (String) session.getAttribute("userid");
 						<!-- sub navi -->
 						<div class="cate_comm">
 							<ul class="cate_d1">
-								<li class="cate_d1_li open"><span class="cate_d1_link ">마이페이지</span>
+								<li class="cate_d1_li open"><span class="cate_d1_link ">자주
+										찾는 질문 FAQ</span>
 									<div class="cate_d2">
 										<ul>
 											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/memberInfo'">마이페이지</a></li>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateForm'">회원정보수정</a></li>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/memberPassForm'">비밀번호변경</a></li>
-										</ul>
-									</div></li>
+												onclick="location.href='${pageContext.request.contextPath}/board/faq/main'">FAQ</a></li>
 
-								<li class="cate_d1_li open"><span class="cate_d1_link ">내
-										판매 상품</span>
-									<div class="cate_d2">
-										<ul>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/userBook/book'">판매중인
-													도서 목록</a></li>
-
+											<c:if test="${admin eq '1'}">
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/board/faq/writeForm'">FAQ
+														등록</a></li>
+											</c:if>
 										</ul>
 									</div></li>
 
 
-								<li class="cate_d1_li open"><span class="cate_d1_link ">주문</span>
+								<li class="cate_d1_li open"><span class="cate_d1_link ">1:1
+										상담</span>
 									<div class="cate_d2">
 										<ul>
 											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/order/slang'">찜목록</a></li>
+												onclick="location.href='${pageContext.request.contextPath}/board/oneOnOne/inquiryForm'">1:1
+													상담하기</a></li>
+
+											<c:if test="${admin eq '1'}">
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/board/oneOnOne/replyList'">1:1
+														상담 답변등록</a></li>
+											</c:if>
+
 											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/order/shoppingBasket'">장바구니</a></li>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/order/orderLog'">주문조회</a></li>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/pointLog'">포인트내역</a></li>
+												onclick="location.href='${pageContext.request.contextPath}/board/oneOnOne/list'">1:1
+													상담내역</a></li>
 										</ul>
 									</div></li>
 
-								<li class="cate_d1_li open"><span class="cate_d1_link ">문의</span>
+								<li class="cate_d1_li open"><span class="cate_d1_link ">공지사항</span>
 									<div class="cate_d2">
 										<ul>
 											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/list'">내
-													문의</a></li>
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/myreview'">내가 쓴 리뷰</a></li>
+												onclick="location.href='${pageContext.request.contextPath}/board/notice/main'">공지사항</a></li>
+
+											<c:if test="${admin eq '1'}">
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/board/notice/writeForm'">공지사항
+														등록</a></li>
+											</c:if>
+
 										</ul>
 									</div></li>
 
 
-								<li class="cate_d1_li open"><span class="cate_d1_link "></span>
+								<li class="cate_d1_li open"><span class="cate_d1_link ">이벤트</span>
 									<div class="cate_d2">
 										<ul>
 											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/logout'">로그아웃</a></li>
+												onclick="location.href='${pageContext.request.contextPath}/board/event/main'">이벤트</a></li>
 
-											<li class="cate_d2_link"><a href="javascript:void(0);"
-												onclick="location.href='${pageContext.request.contextPath}/member/memberDeleteForm'">회원탈퇴</a></li>
-
+											<c:if test="${admin eq '1'}">
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/board/event/writeForm'">이벤트
+														등록 </a></li>
+											</c:if>
 										</ul>
 									</div></li>
+
+
+
+								<c:if test="${admin eq '1'}">
+									<li class="cate_d1_li open"><span class="cate_d1_link ">고객
+											관리</span>
+										<div class="cate_d2">
+											<ul>
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/admin/member'">고객
+														정보 관리</a></li>
+											</ul>
+										</div></li>
+
+									<li class="cate_d1_li open"><span class="cate_d1_link ">도서
+											관리</span>
+										<div class="cate_d2">
+											<ul>
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/admin/book'">도서
+														정보 관리</a></li>
+											</ul>
+
+											<ul>
+												<li class="cate_d2_link"><a href="javascript:void(0);"
+													onclick="location.href='${pageContext.request.contextPath}/admin/check">도서
+														등록 관리</a></li>
+											</ul>
+										</div></li>
+
+
+								</c:if>
+
 
 							</ul>
 
@@ -151,7 +182,7 @@ String userid = (String) session.getAttribute("userid");
 										</script>
 										<br>
 										<form name="FaqForm"
-											action="${pageContext.request.contextPath}/userBook/book?page="
+											action="${pageContext.request.contextPath}/admin/book?page="
 											method="post">
 
 											<p class="select">
@@ -165,7 +196,7 @@ String userid = (String) session.getAttribute("userid");
 														제목</option>
 
 													<option value="author"
-														${search.getSearchType() eq 'author' ? 'selected' : ''}>저자</option>
+														${search.getSearchType() eq 'userid' ? 'selected' : ''}>유저 아이디</option>
 
 												</select>
 											</p>
@@ -206,7 +237,7 @@ String userid = (String) session.getAttribute("userid");
 									if (result) {
 										
 										// 삭제 pro로 이동 
-										window.location.href = "${pageContext.request.contextPath}/userBook/bookDeletePro?booknum=" + booknum;
+										window.location.href = "${pageContext.request.contextPath}/admin/bookDeletePro?booknum=" + booknum;
 
 									} else {
 										// 사용자가 취소를 선택한 경우
@@ -268,21 +299,22 @@ String userid = (String) session.getAttribute("userid");
 												</dd>
 											</dl>
 											<dl class="btn_area">
-											
-											<!-- 품절 -->
-											<c:if test="${b.inventory eq '0'}">
-											<dd style="margin-bottom: 3px;">
-													<span style="color: red;font-size: 15px; margin-left: 29px;">판매완료</span>
+
+												<dd style="margin-bottom: 3px;">
+													<span class="btn_type blue"><a
+														href="${pageContext.request.contextPath}/book/bookUpdateForm?booknum=${b.booknum}">정보
+															수정</a></span>
 												</dd>
-											</c:if>
-											
-											<c:if test="${b.inventory ne '0'}">
+												<dd style="margin-bottom: 3px;">
+													<span class="btn_type skyblue"><a
+														href="javascript:void(0);"
+														onclick="deleteForm(${b.booknum});">도서 삭제</a></span>
+												</dd>
 												<dd>
 													<span class="btn_type white"><a
 														href="${pageContext.request.contextPath}/book/indexmanager?booknum=${b.booknum}">도서
 															정보</a></span>
 												</dd>
-											</c:if>
 											</dl> <%-- <a href="${pageContext.request.contextPath}/book/bookUpdateForm?booknum=${b.booknum}">책정보수정</a> --%>
 										</li>
 
@@ -294,7 +326,7 @@ String userid = (String) session.getAttribute("userid");
 									<div class="view_type" id="AREA_G_2">
 										<br>
 										<li>
-											<div style="font-size: 15px; text-align: center;">등록한 책
+											<div style="font-size: 15px; text-align: center;">검색한 책
 												정보가 없습니다.</div>
 										</li>
 									</div>
@@ -329,7 +361,7 @@ String userid = (String) session.getAttribute("userid");
 											test="${paging.getPage() <= paging.getPageSize() && paging.getPage() != 1}">
 											<!-- 1 페이지(<<) 처리 -->
 											<a href="javascript:void(0);"
-												onclick="pagingSearch('${pageContext.request.contextPath}/userBook/book?page=1')">
+												onclick="pagingSearch('${pageContext.request.contextPath}/admin/book?page=1')">
 												<img
 												src="${pageContext.request.contextPath}/image/paging/btn_pagePrevG.gif">
 											</a>
@@ -337,7 +369,7 @@ String userid = (String) session.getAttribute("userid");
 											<!-- 이전페이지(<) 처리 -->
 											<c:if test="${paging.getStartPage() > 1}">
 												<a href="javascript:void(0);"
-													onclick="pagingSearch('${pageContext.request.contextPath}/userBook/book?page=${paging.getStartPage() - 1}')">
+													onclick="pagingSearch('${pageContext.request.contextPath}/admin/book?page=${paging.getStartPage() - 1}')">
 													<img
 													src="${pageContext.request.contextPath}/image/paging/btn_pagePrev.gif">
 												</a>
@@ -351,11 +383,11 @@ String userid = (String) session.getAttribute("userid");
 											<c:choose>
 												<c:when test="${i == paging.getPage()}">
 													<a class="on" href=""
-														onclick="pagingSearch('${pageContext.request.contextPath}/userBook/book?page=${i}')">${i}</a>
+														onclick="pagingSearch('${pageContext.request.contextPath}/admin/book?page=${i}')">${i}</a>
 												</c:when>
 												<c:otherwise>
 													<a href="javascript:void(0);"
-														onclick="pagingSearch('${pageContext.request.contextPath}/userBook/book?page=${i}')">${i}</a>
+														onclick="pagingSearch('${pageContext.request.contextPath}/admin/book?page=${i}')">${i}</a>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>
@@ -363,7 +395,7 @@ String userid = (String) session.getAttribute("userid");
 									</span> <span class="next-btn"> <!-- 3. 다음페이지(>) 처리 --> <c:if
 											test="${paging.getPageSize() > paging.getOnePage() && paging.getEndPage() < paging.getPageSize()}">
 											<a href="javascript:void(0);"
-												onclick="pagingSearch('${pageContext.request.contextPath}/userBook/book?page=${paging.getEndPage() + 1}')">
+												onclick="pagingSearch('${pageContext.request.contextPath}/admin/book?page=${paging.getEndPage() + 1}')">
 												<img
 												src="${pageContext.request.contextPath}/image/paging/btn_pageNext.gif">
 											</a>

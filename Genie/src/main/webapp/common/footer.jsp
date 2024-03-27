@@ -80,7 +80,7 @@
 			<!-- 챗봇 -->
 			
 			<script>
-			$(function() {
+			/* $(function() {
 			    var INDEX = 0;
 
 			    $("#chat-submit").click(function(e) {
@@ -145,6 +145,133 @@
 			        $(".chat-box").toggle('scale');
 			    });
 			});
+ */$(function() {
+	    var INDEX = 0;
+
+	    $("#chat-submit").click(function(e) {
+	        e.preventDefault();
+	        var msg = $("#chat-input").val();
+	        if (msg.trim() == '') {
+	            return false;
+	        }
+	        generate_message(msg, 'self');
+	        
+	        // AJAX를 사용하여 서버에 메시지를 보냅니다.
+	        $.ajax({
+	            type: 'GET',
+	            url: 'http://127.0.0.1:5000/?msg=' + msg, // 메시지 인코딩
+	            dataType: 'json',
+	            success: function(data) {
+	                var ans = data.msg;
+	                console.log(data);
+	                if (msg === '상품') {
+	                    // 상품 관련 링크 생성
+	                    var productLinks = [
+	                        { id: 'product-A', text: '상품 옵션', msg: '상품 옵션' },
+	                        { id: 'product-B', text: '상품 등록', msg: '상품등록' },
+	                        { id: 'product-C', text: '상품 문의', msg: '상품 문의' }
+	                    ];
+
+	                    productLinks.forEach(function(linkInfo) {
+	                        var productLink = $('<a>', {
+	                            id: linkInfo.id,
+	                            href: '#',
+	                            text: linkInfo.text,
+	                        });
+	                        productLink.click(function(e) {
+	                            handleProductClick(e, linkInfo.msg); // 클릭 시 handleProductClick 함수 호출
+	                        });
+	                        generate_message(productLink.prop('outerHTML'), 'user');
+	                    });
+	                } else {
+	                    var msgArray = ans.split('.');
+	                    for (var i = 0; i < msgArray.length; i++) {
+	                        generate_message(msgArray[i], 'user');
+	                    }
+	                }
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('데이터 가져오기 실패:', error);
+	            }
+	        });
+
+	        // 사용자가 메시지를 보내면 입력 필드를 비웁니다.
+	        $("#chat-input").val('');            
+	    });
+
+	    // 채팅 메시지 생성 함수      
+	    function generate_message(msg, type) {
+	        INDEX++;
+	        var str = "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + "\">";
+	        if (type === 'user') {
+	            str += "<span class=\"msg-avatar\">";
+	            str += "<img src=\"${pageContext.request.contextPath}/image/chatbot/chaticon.png\">";
+	            str += "<span style=\"float: left; margin-top: -32px; margin-left: 35px; font-size: 15px;\">Genie<\/span>";
+	            str += "<\/span>";
+	        }
+	        str += "<div class=\"cm-msg-text\">" + msg + "<\/div>";
+	        str += "<\/div>";
+	        $(".chat-logs").append(str);
+	        $("#cm-msg-" + INDEX).hide().fadeIn(300);
+	        $(".chat-logs").stop().animate({
+	            scrollTop: $(".chat-logs")[0].scrollHeight
+	        }, 1000);
+	    }
+
+	    // 채팅 아이콘 클릭 시 채팅창 토글
+	    $("#chat-circle").click(function() {
+	        $("#chat-circle").toggle('scale');
+	        $(".chat-box").toggle('scale');
+	    });
+
+	    // 채팅 박스 토글
+	    $(".chat-box-toggle").click(function() {
+	        $("#chat-circle").toggle('scale');
+	        $(".chat-box").toggle('scale');
+	    });
+	    
+	    // 공통된 동작을 함수로 정의
+	    function handleProductClick(e, msg) {
+	        e.preventDefault(); // 기본 동작 방지
+
+	        // 메시지를 사용자 채팅창에 표시
+	        generate_message(msg, 'self');
+	        
+	        // 메시지를 서버로 전송
+	        sendAjaxMessage(msg);
+	    }
+
+	    // 클릭 이벤트 핸들러 등록
+	    $(document).on("click", "#product-A", function(e) {
+	        handleProductClick(e, '상품 옵션');
+	    });
+
+	    $(document).on("click", "#product-B", function(e) {
+	        handleProductClick(e, '상품등록');
+	    });
+
+	    $(document).on("click", "#product-C", function(e) {
+	        handleProductClick(e, '상품 문의');
+	    });
+
+
+	    // AJAX를 통해 서버로 메시지 전송하는 함수
+	    function sendAjaxMessage(msg) {
+	        $.ajax({
+	            type: 'GET',
+	            url: 'http://127.0.0.1:5000/?msg=' + msg, // 메시지 인코딩
+	            dataType: 'json',
+	            success: function(data) {
+	                var ans = data.msg;
+	                console.log(data);
+	                generate_message(ans, 'user'); // 받은 데이터를 채팅창에 표시
+	            },
+	            error: function(xhr, status, error) {
+	                console.error('데이터 가져오기 실패:', error);
+	            }
+	        });
+	    }
+	});
 
 			</script>
 
