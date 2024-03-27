@@ -171,8 +171,10 @@ textarea {
 
 #cartbutton{
 
-	width:100.59px !important;
-	height:57.89px !important;
+	width: 100.59px !important;
+    height: 45px !important;
+    color: white;
+    font-weight: 600;
 }
 
 .Ere_btn_blog_sym2 {

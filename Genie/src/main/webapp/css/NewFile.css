@@ -1698,10 +1698,33 @@ a.Ere_sub_gray9:hover { color:#999; text-decoration:none;}
 
 
 /*전자책 장바구니 담기*/
-.Ere_btn_e_cart {height: 57px; display: inline-block;  *zoom: 1; *display: inline; padding: 0; vertical-align: middle;text-align: center;overflow: hidden; text-decoration: none;cursor: pointer; background: #df307f; }
-.Ere_btn_e_cart a:link {white-space: nowrap; text-decoration: none; outline: 0; color: #FFF; font-size:15px; font-weight: bold; font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif; line-height:1.5; display: block; white-space: nowrap; background: #df307f; margin: 0; padding:17px 15px 17px 16px; letter-spacing:-0.03em; }
-.Ere_btn_e_cart a:hover {text-decoration: none; background: #c82370;}
-.Ere_btn_e_cart a:visited {background: #df307f; text-decoration: none;outline: 0;color: #FFF; font-size:15px; font-weight: bold; font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif; display: block;white-space: nowrap; margin: 0;}
+.Ere_btn_e_cart {
+	display: inline-block;
+    margin-left: 3px;
+    border-radius: 3px;
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    background: #002c6a;
+}
+.Ere_btn_e_cart a:link {
+	outline: 0;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif;
+    line-height: 1.5;
+    display: block;
+    white-space: nowrap;
+    background: #ed2840;
+    margin: 0;
+    padding: 15px 20px;
+	}
+.Ere_btn_e_cart a:hover {text-decoration: none; background: #e57381;}
+.Ere_btn_e_cart a:visited {text-decoration: none;outline: 0;color: #FFF; font-size:15px; font-weight: bold; font-family: malgun, "Malgun Gothic", Dotum, 돋움, sans-serif; display: block;white-space: nowrap; margin: 0;}
 
 /*전자책 바로구매 */
 .Ere_btn_e_buyitnow {height: 57px; display: inline-block;  *zoom: 1; *display: inline; padding: 0; vertical-align: middle;text-align: center;overflow: hidden; text-decoration: none;cursor: pointer; background:#e24457;}
