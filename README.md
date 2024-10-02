@@ -6,6 +6,6 @@
 <br>
 
 ## 0. 🌼 노션 링크 
-  https://www.notion.so/Genie-f0686620b07740d49ec7a0f9f6f638fb?pvs=4
+   https://pollen-pirate-580.notion.site/Genie-113075e77c7f8083b4bfe9bec7bdb8fa?pvs=4
 
 <br>
